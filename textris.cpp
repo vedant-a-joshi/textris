@@ -19,7 +19,21 @@ using namespace std;
 vector<int> piecesCounter(7, 0); // purple, blue, red, yellow, green, orange, light blue
 vector<string> piecesNotation = {"##", "[]", "@@", "{}", "$$", "()", "!!"};
 vector<string> pieceName = {"#T#", "[J]", "@Z@", "{O}", "$S$", "(L)", "!I!"};
-deque<int> nextPieces = {rand()%7, rand()%7};
+deque<int> nextPieces = {rand()%7, rand()%4, rand()%7, rand()%4};
+vector<vector<vector<vector<string> > > > pieces = {{{{"  ##  "},{"######"},{"      "}},
+                                                     {{"  ##  "},{"  ####"},{"  ##  "}},
+                                                     {{"      "},{"######"},{"  ##  "}},
+                                                     {{"  ##  "},{"####  "},{"  ##  "}}},
+                                                    {{{"[]    "},{"[][][]"},{"      "}},
+                                                     {{"  [][]"},{"  []  "},{"  []  "}},
+                                                     {{"      "},{"[][][]"},{"    []"}},
+                                                     {{"  []  "},{"  []  "},{"[][]  "}}},
+                                                    {{}, {}, {}, {}},
+                                                    {{}, {}, {}, {}},
+                                                    {{}, {}, {}, {}},
+                                                    {{}, {}, {}, {}},
+                                                    {{}, {}, {}, {}}};
+// first means which random piece, second means which random orientation, last two are just for iterating through the orientation
 
 int score = 0;
 int lines = 0;
