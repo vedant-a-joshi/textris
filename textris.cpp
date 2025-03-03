@@ -5,8 +5,8 @@
 #include <cstdlib>
 #include <thread>
 #include <chrono>
-#include <cmath>
 #include <deque>
+#include <cmath>
 #define int long long
 #define double long double
 #define endl '\n'
@@ -19,26 +19,69 @@ using namespace std;
 vector<int> piecesCounter(7, 0); // purple, blue, red, yellow, green, orange, light blue
 vector<string> piecesNotation = {"##", "[]", "@@", "{}", "$$", "()", "!!"};
 vector<string> pieceName = {"#T#", "[J]", "@Z@", "{O}", "$S$", "(L)", "!I!"};
-deque<int> nextPieces = {rand()%7, rand()%4, rand()%7, rand()%4};
-vector<vector<vector<vector<string> > > > pieces = {{{{"  ##  "},{"######"},{"      "}},
+// deque<int> nextPieces = {rand()%7, rand()%4, rand()%7, rand()%4}; // piece, then orientation
+vector<vector<vector<string> > > pieces = {
+                                                    {{{"  ##  "},{"######"},{"      "}},
                                                      {{"  ##  "},{"  ####"},{"  ##  "}},
                                                      {{"      "},{"######"},{"  ##  "}},
                                                      {{"  ##  "},{"####  "},{"  ##  "}}},
+
                                                     {{{"[]    "},{"[][][]"},{"      "}},
                                                      {{"  [][]"},{"  []  "},{"  []  "}},
                                                      {{"      "},{"[][][]"},{"    []"}},
                                                      {{"  []  "},{"  []  "},{"[][]  "}}},
-                                                    {{}, {}, {}, {}},
-                                                    {{}, {}, {}, {}},
-                                                    {{}, {}, {}, {}},
-                                                    {{}, {}, {}, {}},
-                                                    {{}, {}, {}, {}}};
-// first means which random piece, second means which random orientation, last two are just for iterating through the orientation
+
+                                                    {{{"@@@@  "},{"  @@@@"},{"      "}},
+                                                     {{"    @@"},{"  @@@@"},{"  @@  "}},
+                                                     {{"      "},{"@@@@  "},{"  @@@@"}},
+                                                     {{"  @@  "},{"@@@@  "},{"@@    "}}},
+
+                                                    {{{"{}{}  "},{"{}{}  "},{"      "}},
+                                                     {{"  {}{}"},{"  {}{}"},{"      "}},
+                                                     {{"      "},{"  {}{}"},{"  {}{}"}},
+                                                     {{"      "},{"{}{}  "},{"{}{}  "}}},
+
+                                                    {{{"  $$$$"},{"$$$$  "},{"      "}},
+                                                     {{"  $$  "},{"  $$$$"},{"    $$"}},
+                                                     {{"      "},{"  $$$$"},{"$$$$  "}},
+                                                     {{"$$    "},{"$$$$  "},{"  $$  "}}},
+
+                                                    {{{"    ()"},{"()()()"},{"      "}},
+                                                     {{"  ()  "},{"  ()  "},{"  ()()"}},
+                                                     {{"      "},{"()()()"},{"()    "}},
+                                                     {{"()()  "},{"  ()  "},{"  ()  "}}},
+
+                                                    {{{"        "},{"!!!!!!!!"},{"        "},{"        "}},
+                                                     {{"    !!  "},{"    !!  "},{"    !!  "},{"    !!  "}},
+                                                     {{"        "},{"        "},{"!!!!!!!!"},{"        "}},
+                                                     {{"  !!    "},{"  !!    "},{"  !!    "},{"  !!    "}}}
+                                                    };
+// first means which random piece, second means random orientation, last one for iterating through the orientation
 
 int score = 0;
 int lines = 0;
+int p, o;
 
 vector<vector<string> > matrix(18, vector<string>(10));
+
+void clearScreen();
+void display();
+void initMatrix();
+void nextPiece();
+
+signed main() {
+    fastio
+    srand(time(0));
+
+    initMatrix();
+    for (int i = 0; i < 10; ++i) {
+        nextPiece();
+        for (int a = 0; a < pieces[p][o].size(); ++a) {
+            cout << pieces[p][o][a] << endl;
+        }
+        cout << "------------" << endl;
+    }
+}
 
 void clearScreen() {
     system("clear");
@@ -66,9 +109,13 @@ void initMatrix() {
     }
 }
 
-signed main() {
-    fastio
-    srand(time(0));
-
-    initMatrix();
+void nextPiece() {
+    // p = nextPieces[0];
+    // o = nextPieces[1];
+    // nextPieces.pop_front();
+    // nextPieces.pop_front();
+    // nextPieces.push_back(rand()%7);
+    // nextPieces.push_back(rand()%4);
+    p = rand()%7;
+    o = rand()%4;
 }
