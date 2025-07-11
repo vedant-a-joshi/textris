@@ -17,26 +17,36 @@ using namespace std;
 #define fastio cin.tie(nullptr);ios_base::sync_with_stdio(false);
 
 // colors for text and background
-#define RESET   "\033[0m"
-#define BLACK   "\033[30m"
-#define RED     "\033[31m"
-#define GREEN   "\033[32m"
-#define YELLOW  "\033[33m"
-#define BLUE    "\033[34m"
-#define MAGENTA "\033[35m"
-#define CYAN    "\033[36m"
-#define WHITE   "\033[37m"
-#define BG_BLACK   "\033[40m"
-#define BG_RED     "\033[41m"
-#define BG_GREEN   "\033[42m"
-#define BG_YELLOW  "\033[43m"
-#define BG_BLUE    "\033[44m"
-#define BG_MAGENTA "\033[45m"
-#define BG_CYAN    "\033[46m"
-#define BG_WHITE   "\033[47m"
+#define reset   "\033[0m"
 
-vector<int> piecesCounter(7, 0); // purple, blue, red, yellow, green, orange, light blue
-vector<string> piecesNotation = {"##", "[]", "@@", "{}", "$$", "()", "!!"};
+#define purple "\033[38;5;55m"
+#define bgPurple "\033[48;5;55m"
+
+#define blue    "\033[38;5;20m"
+#define bgBlue    "\033[48;5;20m"
+
+#define red     "\033[38;5;160m"
+#define bgRed     "\033[48;5;160"
+
+#define yellow  "\033[38;5;226m"
+#define bgYellow  "\033[48;5;226m"
+
+#define green   "\033[38;5;46m"
+#define bgGreen   "\033[48;5;46m"
+
+#define orange  "\033[38;5;208m"
+#define bgOrange  "\033[48;5;208m"
+
+#define cyan    "\033[38;5;51m"
+#define bgCyan    "\033[48;5;51m"
+
+#define black   "\033[38;5;0m"
+#define bgBlack   "\033[48;5;0m"
+
+#define white   "\033[38;5;15m"
+#define bgWhite   "\033[48;5;15m"
+
+vector<int> piecesCounter(7, 0); // purple, blue, red, yellow, green, orange, cyan
 vector<string> pieceName = {"#T#", "[J]", "@Z@", "{O}", "$S$", "(L)", "!I!"};
 // deque<int> nextPieces = {rand()%7, rand()%4, rand()%7, rand()%4}; // piece, then orientation
 vector<vector<vector<vector<int> > > > pieces = {
@@ -74,7 +84,7 @@ vector<vector<vector<vector<int> > > > pieces = {
                                                      {{-1,-1,6,-1},{-1,-1,6,-1},{-1,-1,6,-1},{-1,-1,6,-1}},
                                                      {{-1,-1,-1,-1},{-1,-1,-1,-1},{6,6,6,6},{-1,-1,-1,-1}},
                                                      {{-1,6,-1,-1},{-1,6,-1,-1},{-1,6,-1,-1},{-1,6,-1,-1}}}
-                                                    };
+                                                };
 // first means which random piece, second means random orientation, last two for iterating through the orientation
 
 int score = 0;
@@ -93,6 +103,10 @@ signed main() {
     srand(time(0));
 
     initMatrix();
+    matrix[0][0] = 6;
+    matrix[0][1] = 6;
+    matrix[0][2] = 6;
+    matrix[0][3] = 6;
     display();
 }
 
@@ -108,19 +122,19 @@ void display() {
                 case -1: if (j%2 == 1) { cout << ". "; }
                          else { cout << "  "; }
                          break;
-                case 0: cout << MAGENTA << BG_MAGENTA << "##";
+                case 0: cout << bgPurple << "##" << reset;
                         break;
-                case 1: cout << "[]";
+                case 1: cout << bgBlue << "[]" << reset;
                         break;
-                case 2: cout << "@@";
+                case 2: cout << bgRed << "@@" << reset;
                         break;
-                case 3: cout << "{}";
+                case 3: cout << bgYellow << "{}" << reset;
                         break;
-                case 4: cout << "$$";
+                case 4: cout << bgGreen << "$$" << reset;
                         break;
-                case 5: cout << "()";
+                case 5: cout << bgOrange << "()" << reset;
                         break;
-                case 6: cout << "!!";
+                case 6: cout << bgCyan << "!!" << reset;
                         break;
             }
         }
